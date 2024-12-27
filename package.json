@@ -1,0 +1,11 @@
+{
+    "name": "prubatecnicatodolist",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+      "start": "serve public -l 3000"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+  }
+  
