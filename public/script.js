@@ -1,69 +1,84 @@
-const taskInput = document.getElementById('taskInput');
-const addTaskBtn = document.getElementById('addTaskBtn');
-const taskList = document.getElementById('taskList');
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
 
-// Load tasks from localStorage
-const loadTasks = () => {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.forEach(task => createTaskElement(task.text, task.completed));
-};
-
-// Save tasks to localStorage
-const saveTasks = () => {
-    const tasks = Array.from(taskList.children).map(li => ({
-        text: li.querySelector('.task-text').textContent,
-        completed: li.classList.contains('completed')
-    }));
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-};
-
-// Create a task element
+// Crear una tarea
 const createTaskElement = (text, completed = false) => {
-    const li = document.createElement('li');
+  const li = document.createElement("li");
 
-    const span = document.createElement('span');
-    span.textContent = text;
-    span.className = 'task-text';
-    li.appendChild(span);
+  const span = document.createElement("span");
+  span.textContent = text;
+  span.className = "task-text";
+  li.appendChild(span);
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.addEventListener('click', () => {
-        li.remove();
-        saveTasks();
-    });
-    li.appendChild(deleteBtn);
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.className = "buttons";
 
-    if (completed) {
-        li.classList.add('completed');
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Eliminar";
+  deleteBtn.onclick = () => {
+    li.remove();
+    saveTasks();
+  };
+  buttonsDiv.appendChild(deleteBtn);
+
+  r;
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "Editar";
+  editBtn.onclick = () => {
+    const newText = prompt("Editar tarea:", span.textContent);
+    if (newText) {
+      span.textContent = newText;
+      saveTasks();
     }
+  };
+  buttonsDiv.appendChild(editBtn);
 
-    li.addEventListener('click', () => {
-        li.classList.toggle('completed');
-        saveTasks();
-    });
+  li.appendChild(buttonsDiv);
 
-    taskList.appendChild(li);
+  if (completed) li.classList.add("completed");
+
+  li.onclick = (e) => {
+    if (e.target === deleteBtn || e.target === editBtn) return;
+    li.classList.toggle("completed");
+    saveTasks();
+  };
+
+  taskList.appendChild(li);
 };
 
-// Add task
-addTaskBtn.addEventListener('click', () => {
-    const text = taskInput.value.trim();
-    if (!text) {
-        alert('Task cannot be empty!');
-        return;
+//boton de agregar
+addTaskBtn.onclick = () => {
+  const text = taskInput.value.trim();
+  if (!text) return alert("Introduce un nombre para la tarea");
+
+  for (let span of taskList.querySelectorAll("span")) {
+    if (span.textContent === text) {
+      alert("Ya existe una tarea con ese nombre");
+      return;
     }
+  }
 
-    const tasks = Array.from(taskList.children).map(li => li.querySelector('.task-text').textContent);
-    if (tasks.includes(text)) {
-        alert('Task already exists!');
-        return;
-    }
+  createTaskElement(text);
+  taskInput.value = "";
+  saveTasks();
+};
 
-    createTaskElement(text);
-    taskInput.value = '';
-    saveTasks();
-});
+// Guardar tareas en localStorage
+const saveTasks = () => {
+  const tasks = [];
+  taskList.querySelectorAll("li").forEach((li) => {
+    tasks.push({
+      text: li.querySelector("span").textContent,
+      completed: li.classList.contains("completed"),
+    });
+  });
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+};
 
-// Load tasks on page load
+const loadTasks = () => {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach((task) => createTaskElement(task.text, task.completed));
+};
+
 loadTasks();

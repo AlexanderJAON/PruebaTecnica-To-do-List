@@ -1,73 +1,92 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
+    background-color: #ff6600de; 
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: rgb(0, 0, 0); 
 }
+
 .container {
     width: 100%;
     max-width: 400px;
-    background: #fff;
+    background: white; 
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
+
 h1 {
     text-align: center;
-    color: #333;
+    color: #FF6600; 
 }
-.task-input {
+
+.tasktodo {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
-.task-input input {
+
+.tasktodo input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #FF6600;
     border-radius: 4px;
+    color: #333;
 }
-.task-input button {
-    padding: 10px 15px;
-    background-color: #28a745;
+
+.tasktodo button {
+    padding: 10px 10px;
+    background-color: #005BBB;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
-.task-input button:hover {
-    background-color: #218838;
+
+.tasktodo button:hover {
+    background-color: #004499; 
 }
+
 ul {
     list-style: none;
     padding: 0;
 }
+
 li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f9f9f9;
+    background: #ffffff;
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #FF6600; 
     border-radius: 4px;
 }
+
 li.completed {
     text-decoration: line-through;
-    color: #6c757d;
+    color: #005BBB;
 }
+
+
+
+li .buttons {
+    display: flex;
+    gap: 5px;
+}
+
 li button {
-    background-color: #dc3545;
+    background-color: #005BBB; 
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 5px 10px;
+    padding: 6px 10px;
     cursor: pointer;
 }
+
 li button:hover {
-    background-color: #c82333;
+    background-color: #004499; 
 }
