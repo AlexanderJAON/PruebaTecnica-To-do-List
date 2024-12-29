@@ -22,7 +22,6 @@ const createTaskElement = (text, completed = false) => {
   };
   buttonsDiv.appendChild(deleteBtn);
 
-  r;
   const editBtn = document.createElement("button");
   editBtn.textContent = "Editar";
   editBtn.onclick = () => {
