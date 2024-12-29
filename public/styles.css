@@ -71,7 +71,9 @@ li.completed {
     color: #005BBB;
 }
 
-
+li .task-text {
+    flex: 1;
+}
 
 li .buttons {
     display: flex;
